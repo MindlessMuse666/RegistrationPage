@@ -1,8 +1,10 @@
 package com.example.registrationpage
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,8 +18,15 @@ class MainActivity : AppCompatActivity() {
         val userLogin: EditText = findViewById(R.id.user_login)
         val userEmail: EditText = findViewById(R.id.user_email)
         val userPassword: EditText = findViewById(R.id.user_password)
+        val authorizationLink: TextView = findViewById(R.id.authorization_link)
 
         val registrationButton: Button = findViewById(R.id.button_reg)
+
+        authorizationLink.setOnClickListener {
+            val intent = Intent(this, AuthorizationActivity::class.java)
+
+            startActivity(intent)
+        }
 
         registrationButton.setOnClickListener{
             val login = userLogin.text.toString().trim()

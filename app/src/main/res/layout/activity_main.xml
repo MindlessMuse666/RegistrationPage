@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#201E28"
+    android:background="#42aaff"
     tools:context=".MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_bold"
-        android:textColor="#fdfdfd"
+        android:textColor="#ffffff"
         android:layout_gravity="center"
-        android:layout_marginTop="170dp"
-        android:textSize="25sp"
+        android:layout_marginTop="150dp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:text="Создайте аккаунт" />
 
@@ -26,10 +25,10 @@
         android:layout_height="50dp"
         android:ems="10"
         android:inputType="text"
-        android:textColorHint="#6a6a6a"
+        android:textColorHint="#4D4D4D"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:textColor="#fdfdfd"
+        android:textColor="#ffffff"
         android:hint="Введите логин" />
 
     <EditText
@@ -38,10 +37,10 @@
         android:layout_height="50dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:textColorHint="#6a6a6a"
+        android:textColorHint="#4D4D4D"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:textColor="#fdfdfd"
+        android:textColor="#ffffff"
         android:hint="Введите Email" />
 
     <EditText
@@ -50,21 +49,22 @@
         android:layout_height="50dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:textColorHint="#6a6a6a"
+        android:textColorHint="#4D4D4D"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:textColor="#fdfdfd"
+        android:textColor="#FFFFFF"
         android:hint="Введите пароль" />
 
     <Button
         android:id="@+id/button_reg"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:textColor="@color/white"
-        android:backgroundTint="#5e46"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#5552FF"
         android:text="Регистрация" />
 
     <TextView
@@ -74,8 +74,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="120dp"
         android:fontFamily="@font/inter"
-        android:textColor="#fdfdfd"
-        android:textSize="17sp"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
         android:text="Авторизоваться" />
 
 </LinearLayout>

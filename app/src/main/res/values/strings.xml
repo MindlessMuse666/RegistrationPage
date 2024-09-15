@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">RegistrationPage</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_account">Войдите в аккаунт</string>
+    <string name="enter_email">Введите Email</string>
+    <string name="enter_password">Введите пароль</string>
+    <string name="sign_in">Войти</string>
+    <string name="dont_have_account_yet">У вас ещё нет аккаунта?</string>
+    <string name="create_one_now">Создайте его сейчас!</string>
+    <string name="title">Название</string>
+    <string name="description">Описание</string>
+    <string name="price">Цена</string>
+    <string name="look_at">Посмотреть</string>
+    <string name="create_account">Создать</string>
+    <string name="sign_in_to_account">Войти в аккаунт</string>
 </resources>

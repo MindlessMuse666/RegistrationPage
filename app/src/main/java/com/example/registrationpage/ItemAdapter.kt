@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ItemAdapter(var items: List<Item>, var context: Context) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+class ItemAdapter(private var items: List<Item>, private var context: Context) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val image: ImageView = view.findViewById(R.id.item_list_image)
@@ -29,5 +29,13 @@ class ItemAdapter(var items: List<Item>, var context: Context) : RecyclerView.Ad
         holder.title.text = items[position].title
         holder.description.text = items[position].description
         holder.price.text = items[position].price.toString()
+
+        val imageId = context.resources.getIdentifier(
+            items[position].image,
+            "drawable",
+            context.packageName
+        )
+
+        holder.image.setImageResource(imageId)
     }
 }

@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "760069816101",
+    "firebase_url": "https://registrationpage-ae12b-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "registrationpage-ae12b",
+    "storage_bucket": "registrationpage-ae12b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760069816101:android:e2b908b36d4dfc798b64cc",
+        "android_client_info": {
+          "package_name": "com.example.registrationpage"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDh79jQ8pStpJ8tgx1ac33kKrusJRVMyXc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

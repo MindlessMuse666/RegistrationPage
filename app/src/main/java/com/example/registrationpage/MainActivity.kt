@@ -2,50 +2,109 @@ package com.example.registrationpage
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.registrationpage.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ValueEventListener {
+    private lateinit var _binding: ActivityMainBinding
+
+    private lateinit var _database: FirebaseDatabase
+    private lateinit var _auth: FirebaseAuth
+
+    private val _items: ArrayList<Item> = arrayListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        _auth = FirebaseAuth.getInstance()
+        _database = FirebaseDatabase.getInstance()
+        setContentView(_binding.root)
 
-        val userLogin: EditText = findViewById(R.id.user_login)
-        val userEmail: EditText = findViewById(R.id.user_email)
-        val userPassword: EditText = findViewById(R.id.user_password)
-        val authorizationLink: TextView = findViewById(R.id.authorization_link)
-
-        val registrationButton: Button = findViewById(R.id.button_reg)
-
-        authorizationLink.setOnClickListener {
-            val intent = Intent(this, AuthorizationActivity::class.java)
-
-            startActivity(intent)
+        if (_auth.currentUser == null) {
+            startActivity(Intent(this, RegistrationActivity::class.java))
         }
 
-        registrationButton.setOnClickListener{
-            val login = userLogin.text.toString().trim()
-            val email = userEmail.text.toString().trim()
-            val password = userPassword.text.toString().trim()
+        showMainActivity()
+    }
 
-            if (login == "" || email == "" || password == "")
-                Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show()
-            else {
-                val user = User(login, email, password)
-                val database = DbHelper(this, null)
-
-                database.addUser(user)
-                Toast.makeText(this, "Пользователь $login успешно добавлен!", Toast.LENGTH_LONG).show()
-
-                userLogin.text.clear()
-                userEmail.text.clear()
-                userPassword.text.clear()
-            }
+    private fun showMainActivity() {
+        _binding.logoutButton.setOnClickListener {
+            startActivity(Intent(this, AuthorizationActivity::class.java))
+            finish()
         }
+
+        val user = _auth.currentUser
+        val userId = user?.uid
+
+        if (userId != null) {
+            _database.getReference(GlobalConstants.USERS)
+                .child(userId)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val userLogin = snapshot.child(GlobalConstants.USER_LOGIN).value.toString()
+                    _binding.userHelloText.text = "Добро пожаловать, $userLogin!"
+                    Log.d("MainActivity", "Логин: $userLogin")
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("MainActivity", "Ошибка: ${error.message}")
+                    Toast.makeText(this@MainActivity, "Ошибка получения данных", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+
+        _items.add(
+            Item(
+                1,
+                "Суп_грибной",
+                "Суп грибной",
+                "Краткое описание грибного супа",
+                "Описание грибного супа",
+                400
+            )
+        )
+        _items.add(
+            Item(
+                2,
+                "Салат \"Цезарь\"",
+                "Салат \"Цезарь\"",
+                "Краткое описание Салата \"Цезарь\"",
+                "Описание Салата \"Цезарь\"",
+                250
+            )
+        )
+        _items.add(
+            Item(
+                3,
+                "Эспрессо",
+                "Эспрессо",
+                "Краткое описание эспрессо",
+                "Описание Эспрессо",
+                180
+            )
+        )
+
+        _binding.itemsList.layoutManager = LinearLayoutManager(this)
+        _binding.itemsList.adapter = ItemAdapter(_items, this)
+    }
+
+    override fun onDataChange(snapshot: DataSnapshot) {
+        if (snapshot.exists()) {
+            snapshot.getValue(User::class.java)
+        }
+    }
+
+    override fun onCancelled(error: DatabaseError) {
+        Log.e("MainActivity", "Ошибка: ${error.message}")
     }
 }

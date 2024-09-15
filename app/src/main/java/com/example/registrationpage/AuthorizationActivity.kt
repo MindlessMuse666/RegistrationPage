@@ -2,56 +2,45 @@ package com.example.registrationpage
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.registrationpage.databinding.ActivityAuthorizationBinding
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 
 class AuthorizationActivity : AppCompatActivity() {
+    private lateinit var _binding: ActivityAuthorizationBinding
+    private lateinit var _auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_authorization)
-        val userLogin: EditText = findViewById(R.id.user_login_authorization)
-        val userPassword: EditText = findViewById(R.id.user_password_authorization)
+        _binding = ActivityAuthorizationBinding.inflate(layoutInflater)
+        _auth = Firebase.auth
+        setContentView(_binding.root)
 
-        val registrationLink: TextView = findViewById(R.id.registration_link)
-
-        val authorizationButton: Button = findViewById(R.id.button_authorization)
-
-        registrationLink.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-
-            startActivity(intent)
+        _binding.buttonAuthorization.setOnClickListener {
+            authorization()
         }
 
-        authorizationButton.setOnClickListener{
-            val login = userLogin.text.toString().trim()
-            val password = userPassword.text.toString().trim()
+        _binding.registrationLink.setOnClickListener {
+            startActivity(Intent(this, RegistrationActivity::class.java))
+        }
+    }
 
-            if (login == "" || password == "")
-                Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show()
-            else {
-                val database = DbHelper(this, null)
-                val isAuthorization = database.getUser(login, password)
+    private fun authorization() {
+        val userEmail = _binding.userEmail.text.toString()
+        val userPassword = _binding.userPassword.text.toString()
 
-                if (isAuthorization) {
-                    val intent = Intent(this, ItemsActivity::class.java)
-
-                    Toast.makeText(this, "Пользователь $login успешно авторизован!", Toast.LENGTH_LONG).show()
-
-                    userLogin.text.clear()
-                    userPassword.text.clear()
-
-                    startActivity(intent)
-                }
-                else
-                    Toast.makeText(this, "Пользователя $login не существует.", Toast.LENGTH_LONG).show()
-            }
+        _auth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener {
+            if (it.isSuccessful) {
+                Toast.makeText(this, "Добро пожаловать, $userEmail!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            } else
+                Toast.makeText(this, "Логин не найден", Toast.LENGTH_SHORT).show()
         }
     }
 }

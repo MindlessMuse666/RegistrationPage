@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#a2d2ff"
+    android:orientation="vertical"
+    tools:context=".RegistrationActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="135dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffc8dd"
+            android:fontFamily="@font/inter_bold"
+            android:padding="15dp"
+            android:text="Создайте аккаунт"
+            android:textColor="#ffffff"
+            android:textSize="25sp" />
+    </androidx.cardview.widget.CardView>
+
+    <EditText
+        android:id="@+id/user_login"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Введите логин"
+        android:inputType="text"
+        android:textColor="#ffffff"
+        android:textColorHint="#4D4D4D" />
+
+    <EditText
+        android:id="@+id/user_email"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Введите Email"
+        android:inputType="textEmailAddress"
+        android:textColor="#ffffff"
+        android:textColorHint="#4D4D4D" />
+
+    <EditText
+        android:id="@+id/user_password"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="@string/enter_password"
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#4D4D4D" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#ffc8dd"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="10dp">
+
+        <Button
+            android:id="@+id/button_registration"
+            android:layout_width="185dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:text="@string/create_account"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="190dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="155dp"
+        android:backgroundTint="#bde0fe"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="10dp">
+
+        <TextView
+            android:id="@+id/authorization_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/sign_in_to_account"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
